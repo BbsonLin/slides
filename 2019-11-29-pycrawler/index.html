@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-us" prefix="og: http://ogp.me/ns#">
+  <head>
+	<meta name="generator" content="Hugo 0.56.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>A Hugo theme for creating Webslides.js presentations</title>
+    <meta name="author" content="Bobson">
+    
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type='text/css' media='all' href="css/webslides.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/svg-icons.css">
+    
+
+    
+    <link rel="shortcut icon" sizes="16x16" href="/img/favicons/favicon.png">
+    <link rel="shortcut icon" sizes="32x32" href="/img/favicons/favicon-32.png">
+    <link rel="apple-touch-icon icon" sizes="76x76" href="/img/favicons/favicon-76.png">
+    <link rel="apple-touch-icon icon" sizes="120x120" href="/img/favicons/favicon-120.png">
+    <link rel="apple-touch-icon icon" sizes="152x152" href="/img/favicons/favicon-152.png">
+    <link rel="apple-touch-icon icon" sizes="180x180" href="/img/favicons/favicon-180.png">
+    <link rel="apple-touch-icon icon" sizes="192x192" href="/img/favicons/favicon-192.png">
+
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#333333">
+    
+  </head>
+  <body>
+    
+    <main role="main">
+      <article id="webslides">
+        
+
+
+  
+
+  
+
+      
+
+      <section id="slide1">
+        <div class="wrap">
+          <div class="aligncenter">
+
+
+
+<h1 id="toc_0">爬蟲基礎</h1>
+
+<p class="text-subtitle"> <strong>Bobson Lin</strong></p>
+
+<p><strong>2019-11-29</strong></p>
+
+<p>Made with <a href="https://webslides.tv">WebSlides</a></p>
+
+ 
+          </div></div>
+      </section>
+      
+
+      <section id="slide2">
+        <div class="wrap">
+
+
+
+<h1 id="toc_1" class="text-landing"> <strong>OUTLINE</strong></h1>
+
+<ul class="flexblock reasons">
+<li class="text-intro"><a href="#slide=3"><strong>Fetch Data and Save Files</strong></a></li>
+<li class="text-intro"><a href="#slide=4"><strong>Reading and Writing Files</strong></a></li>
+<li class="text-intro"><a href="#slide=5"><strong>Parsing Files</strong> <a href="#slide=5">CSV</a> <a href="#slide=6">XML</a></a></li>
+</ul>
+
+ </div>
+      </section>
+      
+
+      <section id="slide3">
+        <div class="wrap">
+
+
+
+<h1 id="toc_2"><strong>Fetch Data and Save Files</strong></h1>
+
+<p><a href="https://docs.python.org/3.6/library/urllib.html"><code>urllib</code></a> is a Python package that collects several modules for working with URLs.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> urllib.request <span style="color:#f92672">import</span> urlretrieve
+
+<span style="color:#66d9ef">try</span>:
+    urlretrieve(<span style="color:#e6db74">&#39;https://www.w3.org/TR/PNG/iso_8859-1.txt&#39;</span>, <span style="color:#e6db74">&#39;./hello.txt&#39;</span>)
+<span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;發生錯誤,&#39;</span>, e)</code></pre></div>
+<p><a href="https://docs.python.org/3.6/library/urllib.request.html#legacy-interface">docs.python.org - urllib.request - 21.6.24. Legacy interface</a></p>
+
+ </div>
+      </section>
+      
+
+      <section id="slide4">
+        <div class="wrap">
+
+
+
+<h1 id="toc_3"><strong>Reading and Writing Files</strong></h1>
+
+<p>Two ways for reading and writing files in <strong>Python</strong></p>
+
+
+          <div class="grid">
+            <div class="column">
+
+<p>Using <code>open</code> 、<code>read</code>、<code>write</code>、<code>close</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fd <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;./hello.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>)
+r <span style="color:#f92672">=</span> fd<span style="color:#f92672">.</span>read()
+<span style="color:#66d9ef">print</span>(r)
+fd<span style="color:#f92672">.</span>close()</code></pre></div>
+<p><a href="https://docs.python.org/3.6/tutorial/inputoutput.html#reading-and-writing-files">docs.python.org - Input and Output - 7.2 Reading and Writing Files</a></p>
+
+</div>
+            <div class="column">
+
+<p>Using <code>with ... as ...</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./hello.txt&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> fd:
+    fd<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;Hello World 123&#39;</span>)</code></pre></div>
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide5">
+        <div class="wrap">
+
+
+
+<h1 id="toc_4"><strong>Parsing Files - CSV</strong></h1>
+
+<p><strong>CSV</strong> stands for <strong>Comma Separated Values</strong></p>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> csv
+
+<span style="color:#75715e"># 開啟 CSV 檔案</span>
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./sample.csv&#39;</span>) <span style="color:#66d9ef">as</span> csvfile:
+    <span style="color:#75715e"># 讀取 CSV 檔案內容</span>
+    rows <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>reader(csvfile)
+    <span style="color:#75715e"># 以迴圈輸出每一列</span>
+    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> rows:
+        <span style="color:#66d9ef">print</span>(row)</code></pre></div>
+<p><a href="https://docs.python.org/3.6/library/csv.html#examples">docs.python.org - CSV File Reading and Writing - 14.1.5. Examples</a></p>
+
+</div>
+            <div class="column">
+
+<pre><code>['\ufeff序號', '路線編號', '起訖站', '平/假日', '站名', '班次1', '班次2', '班次3', '班次4', '班次5', '班次6', '班次7', '班次8', '班次9', '班次10', '班次11', '是否單邊停靠']
+['1', '51', '香山區公所—火車站（先經中山路）', '平日', '香山區公所', '06:30', '07:50', '09:10', '10:30', '12:00', '13:20', '14:40', '16:10', '18:10', '19:40', '21:10', '否']
+['2', '51', '香山區公所—火車站（先經中山路）', '平日', '香山國小', '06:32', '07:52', '09:12', '10:32', '12:02', '13:22', '14:42', '16:12', '18:12', '19:42', '21:12', '否']
+['3', '51', '香山區公所—火車站（先經中山路）', '平日', '聖德宮', '06:33', '07:53', '09:13', '10:33', '12:03', '13:23', '14:43', '16:13', '18:13', '19:43', '21:13', '否']
+
+...
+</code></pre>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide6">
+        <div class="wrap">
+
+
+
+<h1 id="toc_5"><strong>Parsing Files - XML</strong></h1>
+
+<p>Using Python standard library - <code>xml.dom</code> or <code>xml.etree</code></p>
+
+
+          <div class="grid">
+            <div class="column">
+
+<p><code>xml.dom</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xml.dom.minidom
+
+<span style="color:#75715e"># 解析 XML 檔案</span>
+doc <span style="color:#f92672">=</span> xml<span style="color:#f92672">.</span>dom<span style="color:#f92672">.</span>minidom<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;./sample.xml&#34;</span>)
+
+<span style="color:#75715e"># 印出資訊</span>
+<span style="color:#66d9ef">print</span>(doc<span style="color:#f92672">.</span>getElementsByTagName(<span style="color:#e6db74">&#34;Title&#34;</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>firstChild<span style="color:#f92672">.</span>nodeValue)
+
+<span style="color:#75715e"># 用迴圈印出資訊</span>
+chapters <span style="color:#f92672">=</span> doc<span style="color:#f92672">.</span>getElementsByTagName(<span style="color:#e6db74">&#34;Chapter&#34;</span>)
+<span style="color:#66d9ef">for</span> chapter <span style="color:#f92672">in</span> chapters:
+    <span style="color:#66d9ef">print</span> (chapter<span style="color:#f92672">.</span>getAttribute(<span style="color:#e6db74">&#39;name&#39;</span>), chapter<span style="color:#f92672">.</span>firstChild<span style="color:#f92672">.</span>nodeValue)</code></pre></div>
+<p><a href="https://docs.python.org/3.6/library/xml.dom.html">docs.python.org - 20.6. The Document Object Model API</a></p>
+
+</div>
+            <div class="column">
+
+<p><code>xml.etree</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xml.etree.ElementTree <span style="color:#f92672">as</span> ET 
+
+<span style="color:#75715e"># 解析 XML 檔案</span>
+tree <span style="color:#f92672">=</span> ET<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#39;./sample.xml&#39;</span>) 
+root <span style="color:#f92672">=</span> tree<span style="color:#f92672">.</span>getroot()
+
+<span style="color:#75715e"># 印出資訊</span>
+<span style="color:#66d9ef">print</span>(root[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>text)
+
+chapters <span style="color:#f92672">=</span> root[<span style="color:#ae81ff">2</span>]
+<span style="color:#66d9ef">for</span> chapter <span style="color:#f92672">in</span> chapters:
+    <span style="color:#66d9ef">print</span> (chapter<span style="color:#f92672">.</span>attrib[<span style="color:#e6db74">&#39;name&#39;</span>], chapter<span style="color:#f92672">.</span>text)</code></pre></div>
+<p><a href="https://docs.python.org/3.6/library/xml.etree.elementtree.html#module-xml.etree.ElementTree">docs.python.org - 20.5 The ElementTree XML API</a></p>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide7">
+        <div class="wrap size-50">
+
+
+
+<h1 id="toc_6"><strong>Parsing Files - XML Cont.</strong></h1>
+
+<p>Using Third-party module - <code>xmltodict</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> xmltodict
+
+<span style="color:#75715e"># 解析 XML 檔案</span>
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./sample.xml&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> fd:
+    doc <span style="color:#f92672">=</span> dict(xmltodict<span style="color:#f92672">.</span>parse(fd<span style="color:#f92672">.</span>read()))
+
+<span style="color:#75715e"># 印出資訊</span>
+<span style="color:#66d9ef">print</span>(doc[<span style="color:#e6db74">&#39;CUPOY&#39;</span>][<span style="color:#e6db74">&#39;Title&#39;</span>])
+
+<span style="color:#75715e"># 用迴圈印出資訊</span>
+chapters <span style="color:#f92672">=</span> doc[<span style="color:#e6db74">&#39;CUPOY&#39;</span>][<span style="color:#e6db74">&#39;Chapters&#39;</span>][<span style="color:#e6db74">&#39;Chapter&#39;</span>]
+<span style="color:#66d9ef">for</span> chapter <span style="color:#f92672">in</span> chapters:
+    <span style="color:#66d9ef">print</span> (chapter[<span style="color:#e6db74">&#39;@name&#39;</span>], chapter[<span style="color:#e6db74">&#39;#text&#39;</span>])</code></pre></div>
+<p><a href="https://github.com/martinblech/xmltodict#xmltodict">GitHub - martinblech/xmltodict</a></p>
+
+ </div>
+      </section>
+      
+
+      <section id="slide8" class="bg-black-blue">
+        <div class="wrap fadeInUp">
+          <div class="aligncenter">
+
+
+
+<h1 id="toc_7">To Be Continued&hellip;</h1>
+ 
+          </div></div>
+      </section> 
+
+      </article>
+    </main>
+
+    
+    <script src="js/webslides.min.js"></script>
+<script>window.ws = new WebSlides({minWheelDelta: 40 ,scrollWait: 450 ,slideOffset: 50 ,});</script>
+<script defer src="js/svg-icons.js"></script>
+
+  </body>
+</html>

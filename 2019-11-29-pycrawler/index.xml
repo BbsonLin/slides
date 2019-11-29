@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>A Hugo theme for creating Webslides.js presentations</title>
+    <link>https://example.com/</link>
+    <description>Recent content on A Hugo theme for creating Webslides.js presentations</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://example.com/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/</guid>
+      <description>爬蟲基礎 Bobson Lin
+2019-11-29
+Made with WebSlides
+OUTLINE  Fetch Data and Save Files Reading and Writing Files Parsing Files CSV XML  Fetch Data and Save Files urllib is a Python package that collects several modules for working with URLs.
+from urllib.request import urlretrieve try: urlretrieve(&amp;#39;https://www.w3.org/TR/PNG/iso_8859-1.txt&amp;#39;, &amp;#39;./hello.txt&amp;#39;) except Exception as e: print(&amp;#39;發生錯誤,&amp;#39;, e) docs.python.org - urllib.request - 21.6.24. Legacy interface
+Reading and Writing Files Two ways for reading and writing files in Python</description>
+    </item>
+    
+  </channel>
+</rss>
