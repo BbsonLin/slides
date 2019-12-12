@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en-us" prefix="og: http://ogp.me/ns#">
+  <head>
+	<meta name="generator" content="Hugo 0.56.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title></title>
+    <meta name="author" content="Bobson">
+    
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type='text/css' media='all' href="css/webslides.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/svg-icons.css">
+    
+
+    
+    <link rel="shortcut icon" sizes="16x16" href="/img/favicons/favicon.png">
+    <link rel="shortcut icon" sizes="32x32" href="/img/favicons/favicon-32.png">
+    <link rel="apple-touch-icon icon" sizes="76x76" href="/img/favicons/favicon-76.png">
+    <link rel="apple-touch-icon icon" sizes="120x120" href="/img/favicons/favicon-120.png">
+    <link rel="apple-touch-icon icon" sizes="152x152" href="/img/favicons/favicon-152.png">
+    <link rel="apple-touch-icon icon" sizes="180x180" href="/img/favicons/favicon-180.png">
+    <link rel="apple-touch-icon icon" sizes="192x192" href="/img/favicons/favicon-192.png">
+
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#333333">
+    
+  </head>
+  <body>
+    
+    <main role="main">
+      <article id="webslides">
+        
+
+
+  
+
+  
+
+      
+
+      <section id="slide1">
+        <div class="wrap">
+          <div class="aligncenter">
+
+
+
+<h1 id="toc_0">爬蟲基礎 Cont.</h1>
+
+<p class="text-subtitle"> <strong>Bobson Lin</strong></p>
+
+<p><strong>2019-12-13</strong></p>
+
+<p>Made with <a href="https://webslides.tv">WebSlides</a></p>
+
+ 
+          </div></div>
+      </section>
+      
+
+      <section id="slide2">
+        <div class="wrap">
+
+
+
+<h1 id="toc_1" class="text-landing"> <strong>OUTLINE</strong></h1>
+
+<ul class="flexblock reasons">
+<li class="text-intro"><a href="#slide=3"><strong>Previous Review</strong></a></li>
+<li class="text-intro"><a href="#slide=4"><strong>Parsing Files</strong> [JSON]</a></li>
+<li class="text-intro"><a href="#slide=6"><strong>Connect to API</strong></a></li>
+<li class="text-intro"><a href="#slide=7"><strong>Connect to API - Dcard</strong></a></li>
+<li class="text-intro"><a href="#slide=8"><strong>Connect to API - Zhihu</strong></a></li>
+</ul>
+
+ </div>
+      </section>
+      
+
+      <section id="slide3">
+        <div class="wrap size-70">
+
+
+
+<h1 id="toc_2"><strong>Previous Review</strong></h1>
+
+<h4 id="toc_3"><strong>Fetch Data and Save Files</strong></h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">urlretrieve(<span style="color:#e6db74">&#39;https://www.w3.org/TR/PNG/iso_8859-1.txt&#39;</span>, <span style="color:#e6db74">&#39;./hello.txt&#39;</span>)</code></pre></div>
+<h4 id="toc_4"><strong>Reading and Writing Files</strong></h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./hello.txt&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> fd:
+    fd<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;Hello World 123&#39;</span>)</code></pre></div>
+<h4 id="toc_5"><strong>Parsing Files - CSV</strong></h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./sample.csv&#39;</span>) <span style="color:#66d9ef">as</span> csvfile:
+    rows <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>reader(csvfile)</code></pre></div>
+<h4 id="toc_6"><strong>Parsing Files - XML</strong></h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./sample.xml&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> fd:
+    doc <span style="color:#f92672">=</span> dict(xmltodict<span style="color:#f92672">.</span>parse(fd<span style="color:#f92672">.</span>read()))</code></pre></div>
+ </div>
+      </section>
+      
+
+      <section id="slide4">
+        <div class="wrap size-70">
+
+
+
+<h1 id="toc_7"><strong>Parsing Files - JSON</strong></h1>
+
+<p><strong>JSON</strong> is a syntax for storing and exchanging data, written with <strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation.</p>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jsObj</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;John&#34;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">30</span>, <span style="color:#a6e22e">city</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;New York&#34;</span> };
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">jsObj</span>);
+</code></pre></div>
+</div>
+            <div class="column">
+
+<pre><code>{name: &quot;John&quot;, age: 30, city: &quot;New York&quot;}
+    age: 30
+    city: &quot;New York&quot;
+    name: &quot;John&quot;
+    __proto__: Object
+</code></pre>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide5">
+        <div class="wrap size-70">
+
+
+
+<h1 id="toc_8"><strong>Parsing Files - JSON cont.</strong></h1>
+
+
+          <div class="grid">
+            <div class="column"><hr /><ul class="work size-80 ">
+<li class="work-label aligncenter">
+<p class="aligncenter"> Python </p>
+<p class="aligncenter"> JSON </p></li>
+<li>
+<p class="aligncenter"> dict </p>
+<p class="aligncenter"> object </p></li>
+<li>
+<p class="aligncenter"> list, tuple </p>
+<p class="aligncenter"> array </p></li>
+<li>
+<p class="aligncenter"> str </p>
+<p class="aligncenter"> string </p></li>
+<li>
+<p class="aligncenter"> int, float </p>
+<p class="aligncenter"> number </p></li>
+<li>
+<p class="aligncenter"> True / False </p>
+<p class="aligncenter"> true / false </p></li>
+<li>
+<p class="aligncenter"> None </p>
+<p class="aligncenter"> null </p></li>
+</ul><hr /><p><a href="https://realpython.com/python-json/">Real Python - Working With JSON Data in Python</a></p>
+
+</div>
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> json
+
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./sample.json&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> fd:
+    json_data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(fd)
+    <span style="color:#66d9ef">print</span>(json_data, type(json_data))
+
+json_data<span style="color:#f92672">.</span>append({<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;Bobson&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">28</span>, <span style="color:#e6db74">&#39;city&#39;</span>: <span style="color:#e6db74">&#39;New Taipei&#39;</span>})
+<span style="color:#66d9ef">print</span>(json_data)
+
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./sample.json&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> fd:
+    json<span style="color:#f92672">.</span>dump(json_data, fd, indent<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)</code></pre></div>
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide6">
+        <div class="wrap">
+
+
+
+<h1 id="toc_9"><strong>Connect to API</strong></h1>
+
+<p>HTTP for Humans - <a href="https://requests.readthedocs.io/en/master/"><strong>requests</strong></a></p>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+
+get_resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://api.github.com/events&#39;</span>)
+<span style="color:#66d9ef">print</span>(get_resp<span style="color:#f92672">.</span>text)</code></pre></div>
+<p><br></p>
+
+<pre><code>[{&quot;id&quot;:&quot;11071176982&quot;,&quot;type&quot;:&quot;PushEvent&quot;,&quot;actor&quot;:{&quot;id&quot;:53959525,&quot;login&quot;:&quot;Duvan16&quot;,&quot;display_login&quot;:&quot;Duvan16&quot;,&quot;gravatar_id&quot;:&quot;&quot;,&quot;url&quot;:&quot;https://api.github.com/users/Duvan16&quot;,&quot;avatar_url&quot;:&quot;https://avatars.githubusercontent.com/u/53959525?&quot;...
+</code></pre>
+
+</div>
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+
+post_resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(<span style="color:#e6db74">&#39;https://httpbin.org/post&#39;</span>, data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;key&#39;</span>:<span style="color:#e6db74">&#39;value&#39;</span>})
+<span style="color:#66d9ef">print</span>(post_resp<span style="color:#f92672">.</span>json())</code></pre></div>
+<p><br></p>
+
+<pre><code>{'args': {}, 'data': '', 'files': {}, 'form': {'key': 'value'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '9', 'Content-Type': 'application/x-www-form-urlencoded', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.22.0'}, 'json': None, 'origin': '211.23.8.103, 211.23.8.103', 'url': 'https://httpbin.org/post'}
+</code></pre>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide7">
+        <div class="wrap">
+
+
+
+<h1 id="toc_10"><strong>Connect to API - Dcard</strong></h1>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> json
+<span style="color:#f92672">import</span> requests
+
+resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://www.dcard.tw/_api/forums/pet/posts?popular=true&#39;</span>)
+pop_data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(resp<span style="color:#f92672">.</span>text)
+<span style="color:#66d9ef">print</span>(len(pop_data), <span style="color:#e6db74">&#34;筆資料&#34;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;欄位:&#34;</span>, pop_data[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>keys())
+
+<span style="color:#66d9ef">for</span> data <span style="color:#f92672">in</span> pop_data:
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;標題: {data[&#39;title&#39;]}, 貼文時間: {data[&#39;createdAt&#39;]}, 留言人數: {data[&#39;commentCount&#39;]}, 按讚人數: {data[&#39;likeCount&#39;]}&#34;</span>)</code></pre></div>
+</div>
+            <div class="column">
+
+<pre><code>30 筆資料
+欄位: dict_keys(['id', 'title', 'excerpt', 'anonymousSchool', 'anonymousDepartment', 'pinned', 'forumId', 'replyId', 'createdAt', 'updatedAt', 'commentCount', 'likeCount', 'withNickname', 'tags', 'topics', 'meta', 'forumName', 'forumAlias', 'gender', 'school', 'department', 'replyTitle', 'mediaMeta', 'reactions', 'hidden', 'customStyle', 'isSuspiciousAccount', 'layout', 'withImages', 'withVideos', 'media', 'reportReasonText', 'postAvatar'])
+
+標題: 我養到別人家的貓, 貼文時間: 2019-11-27T02:15:28.197Z, 留言人數: 8, 按讚人數: 178
+標題: 哪裡來的天使, 貼文時間: 2019-11-27T03:55:26.087Z, 留言人數: 2, 按讚人數: 146
+標題: 有沒有人想要認養貓😢, 貼文時間: 2019-11-27T04:05:54.907Z, 留言人數: 12, 按讚人數: 117
+標題: 最近刺蝟有點苦惱……, 貼文時間: 2019-11-27T14:09:04.187Z, 留言人數: 7, 按讚人數: 92
+標題: 貓咪送養, 貼文時間: 2019-11-27T15:53:37.579Z, 留言人數: 5, 按讚人數: 61
+標題: 我好像養了一顆球（？, 貼文時間: 2019-11-27T02:51:29.228Z, 留言人數: 8, 按讚人數: 34
+標題: 跪求原圖, 貼文時間: 2019-11-27T09:03:30.781Z, 留言人數: 3, 按讚人數: 32
+...
+</code></pre>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide8">
+        <div class="wrap">
+
+
+
+<h1 id="toc_11"><strong>Connect to API - Zhihu</strong></h1>
+
+<p>Some APIs will check HTTP(s) headers.</p>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+
+headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;user-agent&#39;</span>: <span style="color:#e6db74">&#39;my-app/0.0.1&#39;</span>}
+resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://www.zhihu.com/api/v4/questions/55493026&#39;</span>, headers<span style="color:#f92672">=</span>headers)
+resp_json <span style="color:#f92672">=</span> resp<span style="color:#f92672">.</span>json()
+
+<span style="color:#66d9ef">print</span>(resp_json)</code></pre></div>
+</div>
+            <div class="column">
+
+<pre><code>{'type': 'question', 'id': 55493026, 'title': '你们都是怎么学 Python 的？', 'question_type': 'normal', 'created': 1486390229, 'updated_time': 1543075931, 'url': 'https://www.zhihu.com/api/v4/questions/55493026', 'relationship': {}}
+</code></pre>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide9" class="bg-black-blue">
+        <div class="wrap fadeInUp">
+          <div class="aligncenter">
+
+
+
+<h1 id="toc_12">To Be Continued&hellip;</h1>
+ 
+          </div></div>
+      </section> 
+
+      </article>
+    </main>
+
+    
+    <script src="js/webslides.min.js"></script>
+<script>window.ws = new WebSlides({minWheelDelta: 40 ,scrollWait: 450 ,slideOffset: 50 ,});</script>
+<script defer src="js/svg-icons.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>https://example.com/</link>
+    <description>Recent content on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>123321</title>
+      <link>https://example.com/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/</guid>
+      <description>爬蟲基礎 Cont. Bobson Lin
+2019-12-13
+Made with WebSlides
+OUTLINE  Previous Review Parsing Files [JSON] Connect to API Connect to API - Dcard Connect to API - Zhihu  Previous Review Fetch Data and Save Files urlretrieve(&amp;#39;https://www.w3.org/TR/PNG/iso_8859-1.txt&amp;#39;, &amp;#39;./hello.txt&amp;#39;) Reading and Writing Files with open(&amp;#39;./hello.txt&amp;#39;, &amp;#39;w&amp;#39;) as fd: fd.write(&amp;#39;Hello World 123&amp;#39;) Parsing Files - CSV with open(&amp;#39;./sample.csv&amp;#39;) as csvfile: rows = csv.reader(csvfile) Parsing Files - XML with open(&amp;#39;./sample.xml&amp;#39;, encoding=&amp;#39;utf-8&amp;#39;) as fd: doc = dict(xmltodict.</description>
+    </item>
+    
+  </channel>
+</rss>
