@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-us" prefix="og: http://ogp.me/ns#">
+  <head>
+	<meta name="generator" content="Hugo 0.56.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title></title>
+    <meta name="author" content="Bobson">
+    
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type='text/css' media='all' href="css/webslides.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/svg-icons.css">
+    
+
+    
+    <link rel="shortcut icon" sizes="16x16" href="/img/favicons/favicon.png">
+    <link rel="shortcut icon" sizes="32x32" href="/img/favicons/favicon-32.png">
+    <link rel="apple-touch-icon icon" sizes="76x76" href="/img/favicons/favicon-76.png">
+    <link rel="apple-touch-icon icon" sizes="120x120" href="/img/favicons/favicon-120.png">
+    <link rel="apple-touch-icon icon" sizes="152x152" href="/img/favicons/favicon-152.png">
+    <link rel="apple-touch-icon icon" sizes="180x180" href="/img/favicons/favicon-180.png">
+    <link rel="apple-touch-icon icon" sizes="192x192" href="/img/favicons/favicon-192.png">
+
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#333333">
+    
+  </head>
+  <body>
+    
+    <main role="main">
+      <article id="webslides">
+        
+
+
+  
+
+  
+
+      
+
+      <section id="slide1">
+        <div class="wrap">
+          <div class="aligncenter">
+
+
+
+<h1 id="toc_0">靜態網頁爬蟲</h1>
+
+<p class="text-subtitle"> <strong>Bobson Lin</strong></p>
+
+<p><strong>2019-12-27</strong></p>
+
+<p>Made with <a href="https://webslides.tv">WebSlides</a></p>
+
+ 
+          </div></div>
+      </section>
+      
+
+      <section id="slide2">
+        <div class="wrap">
+
+
+
+<h1 id="toc_1" class="text-landing"> <strong>OUTLINE</strong></h1>
+
+<ul class="flexblock reasons">
+<li class="text-intro"><a href="#slide=3"><strong>HTML DOM</strong></a></li>
+<li class="text-intro"><a href="#slide=4"><strong>HTML DOM Cont.</strong></a></li>
+<li class="text-intro"><a href="#slide=5"><strong>Parsing HTML</strong></a></li>
+<li class="text-intro"><a href="#slide=6"><strong>Practice: Crawling ETTODAY</strong></a></li>
+<li class="text-intro"><a href="#slide=7"><strong>Practice: Crawling ETTODAY Cont.</strong></a></li>
+</ul>
+
+ </div>
+      </section>
+      
+
+      <section id="slide3">
+        <div class="wrap">
+
+
+
+<h1 id="toc_2"><strong>HTML DOM</strong></h1>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">html</span>&gt;
+  &lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;Page Title&lt;/<span style="color:#f92672">title</span>&gt;
+  &lt;/<span style="color:#f92672">head</span>&gt;
+  &lt;<span style="color:#f92672">body</span>&gt;
+    &lt;<span style="color:#f92672">h1</span>&gt;Level-One Header&lt;/<span style="color:#f92672">h1</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;RipVanWinkle&#34;</span>&gt;
+      RipVanWinkle paragraph.
+    &lt;/<span style="color:#f92672">p</span>&gt;
+  &lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;</code></pre></div>
+<p><strong>DOM Tree 應該長甚麼樣子?</strong></p>
+
+</div>
+            <div class="column">
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide4">
+        <div class="wrap">
+
+
+
+<h1 id="toc_3"><strong>HTML DOM Cont.</strong></h1>
+
+
+          <div class="grid">
+            <div class="column">
+
+<p><img src="https://i.imgur.com/JIO5x9I.png" alt="" /></p>
+
+</div>
+            <div class="column">
+
+<p>在 <strong>DOM</strong> 中，每個 element 、 文字(text) 等等都是一個節點(<strong>Node</strong>)，而節點通常分成以下四種：</p>
+
+<ul>
+<li><strong>Document</strong>: 指這份文件，所有的一切都會從 Document 開始往下進行。</li>
+<li><strong>Element</strong>: 文件內的各個標籤，因此像是 <code>&lt;div&gt;</code><code>&lt;p&gt;</code> 等等各種 HTML Tag。</li>
+<li><strong>Text</strong>: 被各個標籤包起來的文字。</li>
+<li><strong>Attribute</strong>: 各個標籤內的相關屬性。</li>
+</ul>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide5">
+        <div class="wrap">
+
+
+
+<h1 id="toc_4"><strong>Parsing HTML</strong></h1>
+
+<p>A Python library for pulling data out of HTML and XML - <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/"><strong>Beautiful Soup</strong></a></p>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
+
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;./simple.html&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> fp:
+    soup <span style="color:#f92672">=</span> BeautifulSoup(fp, <span style="color:#e6db74">&#39;html.parser&#39;</span>)
+
+<span style="color:#66d9ef">print</span>(soup<span style="color:#f92672">.</span>title, type(soup<span style="color:#f92672">.</span>title))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Element Node:&#39;</span>, soup<span style="color:#f92672">.</span>p)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Text Node:&#39;</span>, soup<span style="color:#f92672">.</span>p<span style="color:#f92672">.</span>text)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Attribute &#34;id&#34;:&#39;</span>, soup<span style="color:#f92672">.</span>p[<span style="color:#e6db74">&#39;id&#39;</span>])</code></pre></div>
+<p><br></p>
+
+<pre><code>&lt;title&gt;Page Title&lt;/title&gt; &lt;class 'bs4.element.Tag'&gt;
+Element Node: &lt;p id=&quot;RipVanWinkle&quot;&gt;
+      RipVanWinkle paragraph.
+    &lt;/p&gt;
+Text Node:
+      RipVanWinkle paragraph.
+
+Attribute &quot;id&quot;: RipVanWinkle
+</code></pre>
+
+</div>
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">body_html <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;body&#39;</span>)
+<span style="color:#66d9ef">print</span>(body_html)
+
+list_html <span style="color:#f92672">=</span> body_html<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;li&#39;</span>)
+<span style="color:#66d9ef">print</span>(list_html)</code></pre></div>
+<p><br></p>
+
+<pre><code>&lt;body&gt;
+&lt;h1&gt;Level-One Header&lt;/h1&gt;
+&lt;p id=&quot;RipVanWinkle&quot;&gt;
+      RipVanWinkle paragraph.
+    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;List No.1&lt;/li&gt;
+&lt;li&gt;List No.2&lt;/li&gt;
+&lt;li&gt;List No.3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+[&lt;li&gt;List No.1&lt;/li&gt;, &lt;li&gt;List No.2&lt;/li&gt;, &lt;li&gt;List No.3&lt;/li&gt;]
+</code></pre>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide6">
+        <div class="wrap">
+
+
+
+<h1 id="toc_5"><strong>Practice: Crawling ETTODAY</strong></h1>
+
+<p><a href="https://www.ettoday.net/news/news-list.htm"><img src="https://i.imgur.com/gty5yLr.png" alt="" /></a></p>
+
+ </div>
+      </section>
+      
+
+      <section id="slide7">
+        <div>
+
+<h1 id="toc_6"><strong>Practice: Crawling ETTODAY Cont.</strong></h1>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
+
+url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://www.ettoday.net/news/news-list.htm&#39;</span>
+r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url)
+
+soup <span style="color:#f92672">=</span> BeautifulSoup(r<span style="color:#f92672">.</span>text)
+
+<span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> soup<span style="color:#f92672">.</span>find(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;part_list_2&#34;</span>)<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;h3&#39;</span>):
+    <span style="color:#66d9ef">print</span>(d<span style="color:#f92672">.</span>find(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span>)<span style="color:#f92672">.</span>text, d<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;a&#39;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>text)</code></pre></div>
+</div>
+            <div class="column">
+
+<pre><code>2019/12/27 12:08 民調墊底柯文哲嘆「兔子游泳輸烏龜」　郭台銘幫抱屈：柯市長值得託付
+2019/12/27 12:07 衝大屯山夜景！他私訊問路況...派出所「母湯得斯」幽默神回　網全被戳笑
+2019/12/27 12:06 聖誕趴玩瘋！汪把曬衣間炸出「雪花飄」　愛媽崩潰：我頭好暈
+2019/12/27 12:05 遭謝長廷諷「說草率草率到」　韓國瑜：他自己要檢討　怎麼倒過來酸我呢？
+2019/12/27 12:03 夫國道火燒車成焦屍！妻接電話「你老公死了」…崩潰哭：我們的小孩才2歲
+2019/12/27 12:02 全家跑去過聖誕節只留牠在家　憤怒烏龜踢倒加熱燈引發大火
+2019/12/27 12:01 日職／王柏融找到新翻譯　火腿宣布蕭一傑離隊
+2019/12/27 12:00 政府封鎖維基百科2年　土耳其最高法院判「違反言論自由」要求解禁！
+2019/12/27 12:00 男友突然來個公主抱！女孩「3肋骨當場摔斷」痛翻送醫…他慘變前任還判賠2萬
+2019/12/27 12:00 1千元爽嗑和牛＋紅酒！台中巷弄老宅燒肉店　必點招牌牛舌飯
+2019/12/27 11:59 唐西奇正式穿上喬丹牌　34代戰靴與郭艾倫同款
+2019/12/27 11:57 25歲孕婦突然狂咳…氣管被「血塊塞爆」險喪命！只因喝水時一個動作
+...
+</code></pre>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide8" class="bg-black-blue">
+        <div class="wrap fadeInUp">
+          <div class="aligncenter">
+
+
+
+<h1 id="toc_7">To Be Continued&hellip;</h1>
+ 
+          </div></div>
+      </section> 
+
+      </article>
+    </main>
+
+    
+    <script src="js/webslides.min.js"></script>
+<script>window.ws = new WebSlides({minWheelDelta: 40 ,scrollWait: 450 ,slideOffset: 50 ,});</script>
+<script defer src="js/svg-icons.js"></script>
+
+  </body>
+</html>

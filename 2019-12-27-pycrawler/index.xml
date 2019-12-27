@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>https://example.com/</link>
+    <description>Recent content on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>123321</title>
+      <link>https://example.com/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/</guid>
+      <description>靜態網頁爬蟲 Bobson Lin
+2019-12-27
+Made with WebSlides
+OUTLINE  HTML DOM HTML DOM Cont. Parsing HTML Practice: Crawling ETTODAY Practice: Crawling ETTODAY Cont.  HTML DOM |||
+&amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;Page Title&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Level-One Header&amp;lt;/h1&amp;gt; &amp;lt;p id=&amp;#34;RipVanWinkle&amp;#34;&amp;gt; RipVanWinkle paragraph. &amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; DOM Tree 應該長甚麼樣子?
+|||
+HTML DOM Cont. |||
+|||
+在 DOM 中，每個 element 、 文字(text) 等等都是一個節點(Node)，而節點通常分成以下四種：
+ Document: 指這份文件，所有的一切都會從 Document 開始往下進行。 Element: 文件內的各個標籤，因此像是 &amp;lt;div&amp;gt;&amp;lt;p&amp;gt; 等等各種 HTML Tag。 Text: 被各個標籤包起來的文字。 Attribute: 各個標籤內的相關屬性。  Parsing HTML A Python library for pulling data out of HTML and XML - Beautiful Soup</description>
+    </item>
+    
+  </channel>
+</rss>
