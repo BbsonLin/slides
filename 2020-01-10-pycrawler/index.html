@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-us" prefix="og: http://ogp.me/ns#">
+  <head>
+	<meta name="generator" content="Hugo 0.56.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title></title>
+    <meta name="author" content="Bobson">
+    
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type='text/css' media='all' href="css/webslides.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/svg-icons.css">
+    
+
+    
+    <link rel="shortcut icon" sizes="16x16" href="/img/favicons/favicon.png">
+    <link rel="shortcut icon" sizes="32x32" href="/img/favicons/favicon-32.png">
+    <link rel="apple-touch-icon icon" sizes="76x76" href="/img/favicons/favicon-76.png">
+    <link rel="apple-touch-icon icon" sizes="120x120" href="/img/favicons/favicon-120.png">
+    <link rel="apple-touch-icon icon" sizes="152x152" href="/img/favicons/favicon-152.png">
+    <link rel="apple-touch-icon icon" sizes="180x180" href="/img/favicons/favicon-180.png">
+    <link rel="apple-touch-icon icon" sizes="192x192" href="/img/favicons/favicon-192.png">
+
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#333333">
+    
+  </head>
+  <body>
+    
+    <main role="main">
+      <article id="webslides">
+        
+
+
+  
+
+  
+
+      
+
+      <section id="slide1">
+        <div class="wrap">
+          <div class="aligncenter">
+
+
+
+<h1 id="toc_0">靜態網頁爬蟲 Cont.</h1>
+
+<p class="text-subtitle"> <strong>Bobson Lin</strong></p>
+
+<p><strong>2020-01-10</strong></p>
+
+<p>Made with <a href="https://webslides.tv">WebSlides</a></p>
+
+ 
+          </div></div>
+      </section>
+      
+
+      <section id="slide2">
+        <div class="wrap">
+
+
+
+<h1 id="toc_1" class="text-landing"> <strong>OUTLINE</strong></h1>
+
+<ul class="flexblock reasons">
+<li class="text-intro"><a href="#slide=3"><strong>Practice: Crawling Yahoo Movie</strong></a></li>
+<li class="text-intro"><a href="#slide=4"><strong>Practice: Crawling Yahoo Movie Cont.</strong></a></li>
+<li class="text-intro"><a href="#slide=5"><strong>Practice: Crawling Bank Exchange Rate</strong></a></li>
+<li class="text-intro"><a href="#slide=6"><strong>Practice: Crawling Bank Exchange Rate Cont.</strong></a></li>
+</ul>
+
+ </div>
+      </section>
+      
+
+      <section id="slide3">
+        <div class="wrap">
+
+
+
+<h1 id="toc_2"><strong>Practice: Crawling Yahoo Movie</strong></h1>
+
+<p><img src="https://i.imgur.com/mjhiD0Q.png" alt="" /></p>
+
+ </div>
+      </section>
+      
+
+      <section id="slide4">
+        <div>
+
+<h1 id="toc_3"><strong>Practice: Crawling Yahoo Movie Cont.</strong></h1>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> re
+<span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
+
+max_page <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+<span style="color:#66d9ef">for</span> page_number <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, max_page<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>):
+    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://movies.yahoo.com.tw/movie_intheaters.html&#39;</span>
+    payload <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;page&#39;</span>:str(page_number)}
+    resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url, params<span style="color:#f92672">=</span>payload)
+    resp<span style="color:#f92672">.</span>encoding <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;utf-8&#39;</span>
+    soup <span style="color:#f92672">=</span> BeautifulSoup(resp<span style="color:#f92672">.</span>text, <span style="color:#e6db74">&#39;lxml&#39;</span>)
+
+    movie_list <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;ul&#34;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;class&#34;</span>:<span style="color:#e6db74">&#34;release_list&#34;</span>})<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#34;li&#34;</span>)  <span style="color:#75715e"># 擷取電影介紹</span>
+    <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> movie_list:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;----------------------------------------------------------------------&#34;</span>)
+        movie_name <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;div&#34;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;class&#34;</span>:<span style="color:#e6db74">&#34;release_movie_name&#34;</span>})  <span style="color:#75715e"># 電影名稱</span>
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;電影名稱：&#34;</span>, movie_name<span style="color:#f92672">.</span>a<span style="color:#f92672">.</span>string)
+
+        level_box <span style="color:#f92672">=</span> movie_name<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;dl&#34;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;class&#34;</span>:<span style="color:#e6db74">&#34;levelbox&#34;</span>})  <span style="color:#75715e"># 定位電影評價資訊欄位</span>
+
+        expectation <span style="color:#f92672">=</span> level_box<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;div&#34;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;class&#34;</span>:<span style="color:#e6db74">&#34;leveltext&#34;</span>})  <span style="color:#75715e"># 期待度</span>
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;期待度：&#34;</span>, expectation<span style="color:#f92672">.</span>span<span style="color:#f92672">.</span>string)
+        satisfaction <span style="color:#f92672">=</span> level_box<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;span&#34;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;class&#34;</span>:<span style="color:#e6db74">&#34;count&#34;</span>})  <span style="color:#75715e"># 滿意度</span>
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;滿意度：&#34;</span>, satisfaction[<span style="color:#e6db74">&#34;data-num&#34;</span>])  <span style="color:#75715e"># 滿意度可以從&#34;data-num&#34;這個屬性擷取</span>
+        movie_info <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;div&#34;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;class&#34;</span>:<span style="color:#e6db74">&#34;release_text&#34;</span>})  <span style="color:#75715e"># 簡介</span>
+        <span style="color:#66d9ef">print</span>(movie_info<span style="color:#f92672">.</span>span<span style="color:#f92672">.</span>string)</code></pre></div>
+</div>
+            <div class="column">
+
+<pre><code>----------------------------------------------------------------------
+電影名稱： 
+                  兔嘲男孩
+期待度： 82%
+滿意度： 4.3
+
+                  ★榮獲本屆多倫多影展觀眾票選大獎及導演大獎  強勢問鼎奧斯卡
+★諷刺喜劇鬼才大導塔伊加維迪提 自編自導自演 顛覆想像諷刺全新大作
+★「黑寡婦」史嘉蕾喬韓森、「胖艾美」瑞貝威爾森眾星齊聚爆笑衝撞「國家機器」 
+ 
+一個10歲的小男孩在大時代的動盪下，他要面對…
+國家機器的操弄、意識型態的禁錮、家庭信仰的衝突…
+他的小腦袋開始錯亂
+他要釐出個真理
+他要找到他的生存之道
+所以…
+他要…
+吐嘲這個世界、吐嘲他的信仰、吐嘲他的親友
+雖然他膽子如兔子般的小
+但他卻有著想與世界爭論的吐嘲決心
+他是 「兔嘲男孩」
+ 
+好萊塢另類鬼才導演—塔伊加維迪提，聯手福斯探照燈推出二戰黑色幽默諷刺大作。喬喬（羅曼格里芬戴維斯 飾） 身為一個希特勒青年團學員，除了滿腔愛國熱血外，還有個神秘的幻想好友， 
+只是他長的竟然和元首—阿道夫希特勒一樣！
+...
+</code></pre>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide5">
+        <div class="wrap">
+
+
+
+<h1 id="toc_4"><strong>Practice: Crawling Bank Exchange Rate</strong></h1>
+
+<p><img src="https://i.imgur.com/jcqIevB.png" alt="" /></p>
+
+ </div>
+      </section>
+      
+
+      <section id="slide6">
+        <div>
+
+<h1 id="toc_5"><strong>Practice: Crawling Bank Exchange Rate Cont.</strong></h1>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
+
+<span style="color:#75715e"># 進入台灣銀行牌告匯率網頁，查看當日匯率資料</span>
+url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://rate.bot.com.tw/xrt?Lang=zh-TW&#34;</span>
+resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url)
+resp<span style="color:#f92672">.</span>encoding <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;utf-8&#39;</span>
+<span style="color:#75715e"># print(resp.text)  # 如有需要，列印出網頁原始碼</span>
+
+html <span style="color:#f92672">=</span> BeautifulSoup(resp<span style="color:#f92672">.</span>text, <span style="color:#e6db74">&#34;lxml&#34;</span>)
+rate_table <span style="color:#f92672">=</span> html<span style="color:#f92672">.</span>find(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;table&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;title&#39;</span>:<span style="color:#e6db74">&#39;牌告匯率&#39;</span>})<span style="color:#f92672">.</span>find(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tbody&#39;</span>)<span style="color:#f92672">.</span>find_all(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tr&#39;</span>)
+
+<span style="color:#75715e"># 查詢美金(也就是匯率表的第一個元素)對台幣的匯率</span>
+currency <span style="color:#f92672">=</span> rate_table[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>find(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;div&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;visible-phone print_hide&#39;</span>})
+<span style="color:#66d9ef">print</span>(currency<span style="color:#f92672">.</span>get_text()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>))  <span style="color:#75715e"># 去掉空白</span>
+
+buy_rate <span style="color:#f92672">=</span> rate_table[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>find(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;td&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;data-table&#39;</span>:<span style="color:#e6db74">&#39;本行現金買入&#39;</span>})
+sell_rate <span style="color:#f92672">=</span> rate_table[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>find(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;td&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;data-table&#39;</span>:<span style="color:#e6db74">&#39;本行現金賣出&#39;</span>})
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;即時現金買入: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, 即時現金賣出: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (buy_rate<span style="color:#f92672">.</span>get_text(), sell_rate<span style="color:#f92672">.</span>get_text()))</code></pre></div>
+</div>
+            <div class="column">
+
+<pre><code>美金(USD)
+
+即時現金買入: 29.58, 即時現金賣出: 30.25
+</code></pre>
+
+<p><img src="https://i.imgur.com/4305ch3.png" alt="" /></p>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide7" class="bg-black-blue">
+        <div class="wrap fadeInUp">
+          <div class="aligncenter">
+
+
+
+<h1 id="toc_6">To Be Continued&hellip;</h1>
+ 
+          </div></div>
+      </section> 
+
+      </article>
+    </main>
+
+    
+    <script src="js/webslides.min.js"></script>
+<script>window.ws = new WebSlides({minWheelDelta: 40 ,scrollWait: 450 ,slideOffset: 50 ,});</script>
+<script defer src="js/svg-icons.js"></script>
+
+  </body>
+</html>
