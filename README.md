@@ -7,3 +7,4 @@
 
 * 2020-01
     * [靜態網頁爬蟲 Cont.](https://bbsonlin.github.io/slides/2020-01-10-pycrawler/)
+    * [動態網頁爬蟲](https://bbsonlin.github.io/slides/2020-01-31-pycrawler/)

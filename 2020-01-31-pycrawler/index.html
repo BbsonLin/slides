@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en-us" prefix="og: http://ogp.me/ns#">
+  <head>
+	<meta name="generator" content="Hugo 0.56.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title></title>
+    <meta name="author" content="Bobson">
+    
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type='text/css' media='all' href="css/webslides.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/svg-icons.css">
+    
+
+    
+    <link rel="shortcut icon" sizes="16x16" href="/img/favicons/favicon.png">
+    <link rel="shortcut icon" sizes="32x32" href="/img/favicons/favicon-32.png">
+    <link rel="apple-touch-icon icon" sizes="76x76" href="/img/favicons/favicon-76.png">
+    <link rel="apple-touch-icon icon" sizes="120x120" href="/img/favicons/favicon-120.png">
+    <link rel="apple-touch-icon icon" sizes="152x152" href="/img/favicons/favicon-152.png">
+    <link rel="apple-touch-icon icon" sizes="180x180" href="/img/favicons/favicon-180.png">
+    <link rel="apple-touch-icon icon" sizes="192x192" href="/img/favicons/favicon-192.png">
+
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#333333">
+    
+  </head>
+  <body>
+    
+    <main role="main">
+      <article id="webslides">
+        
+
+
+  
+
+  
+
+      
+
+      <section id="slide1">
+        <div class="wrap">
+          <div class="aligncenter">
+
+
+
+<h1 id="toc_0">動態網頁爬蟲</h1>
+
+<p class="text-subtitle"> <strong>Bobson Lin</strong></p>
+
+<p><strong>2020-01-31</strong></p>
+
+<p>Made with <a href="https://webslides.tv">WebSlides</a></p>
+
+ 
+          </div></div>
+      </section>
+      
+
+      <section id="slide2">
+        <div class="wrap">
+
+
+
+<h1 id="toc_1" class="text-landing"> <strong>OUTLINE</strong></h1>
+
+<ul class="flexblock reasons">
+<li class="text-intro"><a href="#slide=3"><strong>Common Methods</strong></a></li>
+<li class="text-intro"><a href="#slide=4"><strong>Using Selenium</strong></a></li>
+<li class="text-intro"><a href="#slide=5"><strong>Practice: Crawling ETTODAY</strong></a></li>
+<li class="text-intro"><a href="#slide=6"><strong>Practice: Crawling ETTODAY Nested</strong></a></li>
+</ul>
+
+ </div>
+      </section>
+      
+
+      <section id="slide3">
+        <div class="wrap">
+
+
+
+<h1 id="toc_2"><strong>Common Methods</strong></h1>
+
+
+          <div class="grid">
+            <div class="column">
+
+<p><img src="https://i.imgur.com/7bWJduh.png" alt="Imgur" /></p>
+
+</div>
+            <div class="column">
+
+<h4 id="toc_3"><strong>1. API 請求</strong></h4>
+
+<h4 id="toc_4"><strong>2. 模擬瀏覽器</strong></h4>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide4">
+        <div>
+
+<h1 id="toc_5"><strong>Using Selenium</strong></h1>
+
+<h4 id="toc_6">1. Installation</h4>
+
+<pre><code>pip install selenium
+</code></pre><hr /><h4 id="toc_7">2. Download the WebDriver binary</h4>
+
+<p><a href="https://selenium.dev/documentation/en/webdriver/driver_requirements/#quick-reference">selenium.dev/documentation - Driver requirements</a></p><hr /><h4 id="toc_8">3. Getting started</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> selenium <span style="color:#f92672">import</span> webdriver
+
+driver <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Chrome()
+driver<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://selenium.dev&#39;</span>)
+
+<span style="color:#66d9ef">print</span>(driver<span style="color:#f92672">.</span>page_source)
+
+driver<span style="color:#f92672">.</span>close()</code></pre></div>
+ </div>
+      </section>
+      
+
+      <section id="slide5">
+        <div>
+
+<h1 id="toc_9"><strong>Practice: Crawling ETTODAY</strong></h1>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">browser <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Chrome()
+browser<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://www.ettoday.net/news/news-list.htm&#34;</span>)
+today_date <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>today()
+move_page_down <span style="color:#f92672">=</span> ActionChains(browser)<span style="color:#f92672">.</span>send_keys(Keys<span style="color:#f92672">.</span>END)
+
+<span style="color:#66d9ef">while</span> True:
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+    move_page_down<span style="color:#f92672">.</span>perform()
+    html_source <span style="color:#f92672">=</span> browser<span style="color:#f92672">.</span>page_source
+    soup <span style="color:#f92672">=</span> BeautifulSoup(html_source)
+
+    last_news <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;part_list_2&#34;</span>)<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;h3&#39;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+    last_news_date <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(last_news<span style="color:#f92672">.</span>find(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span>)<span style="color:#f92672">.</span>text, <span style="color:#e6db74">&#39;%Y/%m/</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M&#39;</span>)
+    
+    <span style="color:#66d9ef">if</span> last_news_date<span style="color:#f92672">.</span>date() <span style="color:#f92672">&lt;</span> today_date:  <span style="color:#75715e"># 找到時間為昨天的新聞為止</span>
+        <span style="color:#66d9ef">break</span>
+
+<span style="color:#66d9ef">for</span> news <span style="color:#f92672">in</span> soup<span style="color:#f92672">.</span>find(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;part_list_2&#34;</span>)<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;h3&#39;</span>):
+    news_datetime <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(news<span style="color:#f92672">.</span>find(class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span>)<span style="color:#f92672">.</span>text, <span style="color:#e6db74">&#39;%Y/%m/</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M&#39;</span>)
+    <span style="color:#66d9ef">if</span> news_datetime<span style="color:#f92672">.</span>date() <span style="color:#f92672">&lt;</span> today_date:
+        <span style="color:#66d9ef">break</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">print</span>(news_datetime, news<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;a&#39;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>text)
+        
+browser<span style="color:#f92672">.</span>quit()</code></pre></div>
+</div>
+            <div class="column">
+
+<pre><code>2020-01-02 11:37:00 新賽季輪值名單張育成榜上有名　有機會競爭先發二壘手
+2020-01-02 11:34:00 《獵魔士》Netflix上線　立即登雙料冠軍
+2020-01-02 11:33:00 快訊／「徒步」尋找黑鷹　搜救人員要走3-4小時才能到光點消失處
+2020-01-02 11:33:00 跨完年回程被「草叢小傢伙」盯上　討抱成為「2020年第1分禮物」
+2020-01-02 11:32:00 升官親妹掌權、建石碑神格化生母　日媒分析金正恩：宣告勢力穩固
+2020-01-02 11:31:00 LPGA票選近10年最佳球員　快來幫助曾雅妮進決賽
+2020-01-02 11:29:00 快訊／黑鷹迫降烏來13人完整名單：沈一鳴上將、2位中將、3位少將
+2020-01-02 11:26:00 快訊／黑鷹直升機迫降　賴清德向媽祖祈求機上人員平安：我們一條心
+2020-01-02 11:26:00 雲端最前線／助選？擾民？蔡英文上班尖峰路口拜票
+2020-01-02 11:26:00 應采兒「超明顯4月大肚」現形！　鏡頭往下…網看傻：太誇張了
+2020-01-02 11:26:00 甜瓜返麥迪遜花園廣場！球迷高舉「想念你」　飆本季新高26分卻慘輸
+2020-01-02 11:26:00 少買薄荷、柑橘口味！醫曝護脣膏「含10成份」超母湯...嘴恐狂冒水泡
+2020-01-02 11:24:00 戴資穎新年告白球迷還考慮要做這件事　網搶報名：超期待
+2020-01-02 11:23:00 丈夫結紮2次！輸精管「剪斷+電燒」絕育…1年後人妻竟懷孕了
+2020-01-02 11:20:00 哈利王子曬萌兒　小肉腳套UGG羊毛靴
+2020-01-02 11:20:00 駐巴格達美國大使館事件懶人包！　數千名親伊朗示威民眾元旦撤退
+2020-01-02 11:19:00 竹聯幫堂口為酒店小姐經紀「網內互打」　15煞衝撞鐵門怒丟信號彈
+2020-01-02 11:19:00 首次為立委候選人拉票！王丹大讚李問「原因曝光」：真正愛台灣的年輕人
+2020-01-02 11:18:00 快訊／黑鷹直升機迫降　蔡英文指示全力搜救：人員平安是第一要務！
+2020-01-02 11:17:00 余苑綺新年曝好消息「小兒子狀況變好」　小女兒緊貼笑喊：媽媽加油！
+2020-01-02 11:17:00 約會都她買單！男友嫌錢少「妳去當直播主啦」　萬人全看傻...妹子硬起來了
+2020-01-02 11:17:00 韓國瑜半夜甜摟李佳芬　兩人原來在看「這個影片」
+2020-01-02 11:16:00 伯朗收店資遣員工仍有年終　路易莎 「平價咖啡精品化」市場大震盪
+2020-01-02 11:15:00 勞動事件法正式施行　「調解前置原則」期待傭僱雙贏
+...
+</code></pre>
+
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide6">
+        <div>
+
+<h1 id="toc_10"><strong>Practice: Crawling ETTODAY Nested</strong></h1>
+
+
+          <div class="grid">
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#</span>
+<span style="color:#75715e"># 這裡先建立一個函數，其功能是連到外部連結，並爬取新聞內容。</span>
+<span style="color:#75715e">#</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getNewsDetailContent</span>(link_url):
+    resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(link_url)
+    resp<span style="color:#f92672">.</span>encoding <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;utf-8&#39;</span>
+    <span style="color:#75715e">#print(resp.text)</span>
+
+    soup <span style="color:#f92672">=</span> BeautifulSoup(resp<span style="color:#f92672">.</span>text)
+    news_content <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;div&#34;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;story&#39;</span>})<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#34;p&#34;</span>)
+    <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> news_content:
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        .string屬性說明：
+</span><span style="color:#e6db74">        (1) 若當前tag節點底下沒有其他tag子節點，會直接抓取內容(返回&#34;NavigableString&#34;)
+</span><span style="color:#e6db74">        (2) 若當前tag節點底下只有唯一的一個tag子節點，也會直接抓取tag子節點的內容(返回&#34;NavigableString&#34;)
+</span><span style="color:#e6db74">        (3) 但若當前tag節點底下還有很多個tag子節點，.string就無法判斷，(返回&#34;None&#34;)
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">if</span> ((p<span style="color:#f92672">.</span>string) <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None):
+            <span style="color:#66d9ef">print</span>(p<span style="color:#f92672">.</span>string)</code></pre></div>
+</div>
+            <div class="column">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ETtoday_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://www.ettoday.net/news/focus/</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">8%B2%A1</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">7%B6%93/&#34;</span>  <span style="color:#75715e">#財經新聞</span>
+browser <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Chrome()
+browser<span style="color:#f92672">.</span>get(ETtoday_url)  <span style="color:#75715e"># 打開瀏覽器並連到東森新聞雲網頁</span>
+
+<span style="color:#75715e"># 以下是用Selenium模擬下拉網頁動作，讓網頁更新</span>
+last_height <span style="color:#f92672">=</span> browser<span style="color:#f92672">.</span>execute_script(<span style="color:#e6db74">&#34;window.scrollTo(0, document.body.scrollHeight);&#34;</span>)
+<span style="color:#66d9ef">while</span> True:
+    browser<span style="color:#f92672">.</span>execute_script(<span style="color:#e6db74">&#34;window.scrollTo(0, document.body.scrollHeight);&#34;</span>)
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+
+    new_height <span style="color:#f92672">=</span> browser<span style="color:#f92672">.</span>execute_script(<span style="color:#e6db74">&#34;return document.body.scrollHeight&#34;</span>)
+    <span style="color:#66d9ef">if</span> new_height <span style="color:#f92672">==</span> last_height:
+        <span style="color:#66d9ef">break</span>
+    last_height <span style="color:#f92672">=</span> new_height
+
+html <span style="color:#f92672">=</span> browser<span style="color:#f92672">.</span>page_source  <span style="color:#75715e"># 爬取網頁內容，解析後萃取新聞摘要</span>
+soup <span style="color:#f92672">=</span> BeautifulSoup(html)
+all_news <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;div&#34;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;block block_1 infinite_scroll&#39;</span>})
+news_block <span style="color:#f92672">=</span> all_news<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;div&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;piece clearfix&#39;</span>})
+
+<span style="color:#66d9ef">for</span> i, news_item <span style="color:#f92672">in</span> enumerate(news_block):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;----------------------------------------------------------------------&#34;</span>)
+    news_body <span style="color:#f92672">=</span> news_item<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;h3&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">[</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">] </span><span style="color:#e6db74">%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (i, news_body<span style="color:#f92672">.</span>a<span style="color:#f92672">.</span>string))
+
+    <span style="color:#75715e"># 連到外部連結，擷取詳細新聞內容</span>
+    externalLink <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://www.ettoday.net&#34;</span> <span style="color:#f92672">+</span> news_body<span style="color:#f92672">.</span>a[<span style="color:#e6db74">&#34;href&#34;</span>]
+    getNewsDetailContent(externalLink)
+
+browser<span style="color:#f92672">.</span>quit()</code></pre></div>
+</div>
+          </div> </div>
+      </section>
+      
+
+      <section id="slide7" class="bg-black-blue">
+        <div class="wrap fadeInUp">
+          <div class="aligncenter">
+
+
+
+<h1 id="toc_11">To Be Continued&hellip;</h1>
+ 
+          </div></div>
+      </section> 
+
+      </article>
+    </main>
+
+    
+    <script src="js/webslides.min.js"></script>
+<script>window.ws = new WebSlides({minWheelDelta: 40 ,scrollWait: 450 ,slideOffset: 50 ,});</script>
+<script defer src="js/svg-icons.js"></script>
+
+  </body>
+</html>

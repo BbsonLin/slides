@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>https://example.com/</link>
+    <description>Recent content on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>123321</title>
+      <link>https://example.com/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/</guid>
+      <description>動態網頁爬蟲 Bobson Lin
+2020-01-31
+Made with WebSlides
+OUTLINE  Common Methods Using Selenium Practice: Crawling ETTODAY Practice: Crawling ETTODAY Nested  Common Methods |||
+|||
+1. API 請求 2. 模擬瀏覽器 Using Selenium 1. Installation pip install selenium  &amp;ndash;
+2. Download the WebDriver binary selenium.dev/documentation - Driver requirements
+&amp;ndash;
+3. Getting started from selenium import webdriver driver = webdriver.Chrome() driver.get(&amp;#39;https://selenium.dev&amp;#39;) print(driver.page_source) driver.close() Practice: Crawling ETTODAY |||
+browser = webdriver.Chrome() browser.</description>
+    </item>
+    
+  </channel>
+</rss>
