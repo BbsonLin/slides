@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>https://example.com/</link>
+    <description>Recent content on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>123321</title>
+      <link>https://example.com/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/</guid>
+      <description>爬蟲框架 Scrapy Bobson Lin
+2020-02-27
+Made with WebSlides
+OUTLINE  Introduction Practice: Crawling PTT Practice: Crawling Cupoy  Introduction |||
+ Ref: https://docs.scrapy.org/en/latest/topics/architecture.html
+|||
+ Scrapy Engine: 整個框架的核心負責處理整個系統的資料流與事件。 Scheduler: 排程器，接收Engine的請求放到佇列中並決定下一個要抓取的網址（預設也會去除重複的網址）。 Downloader: 用於下載網頁內容(發送HTTP請求/接收HTTP回應)，並將內容返回給 Spider。 Spiders: 從網頁中提取自己需要的項目。 Item Pipeline: 用來持久化實體、驗證實體的有效性、清除不需要的資訊。當頁面被解析後發送到專案管道經過幾個特定的順序處理資料。  &amp;ndash;
+ Spider 發送最初的請求(Requests)給Engine。 Engine 在 Scheduler 調度一個請求(Request)，並要求下一次 Requests 做爬取。 Scheduler 回傳下一個 Request 給 Engine。 Engine 透過 Downloader Middlewares 發送請求給 Downloader。 只要頁面結束下載，Downloader 產生一個 Response 透過 Downloader Middlewares 傳送給 Engine。 Engine 收到來自 Downloader 的 Response 並透過 Spider Middlewares 發送給 Spider 處理。 Spider 處理 Response 並爬取的項目(item)和新的請求(Requests)，透過Spider Middlewares回傳給Engine。 Engine 發送處理的項目(item)給 Item Pipelines 接著發送處理的請求(Requests)到Scheduler要求下一個可能的爬蟲請求。  Practice: Crawling PTT Crawling PTT</description>
+    </item>
+    
+  </channel>
+</rss>
